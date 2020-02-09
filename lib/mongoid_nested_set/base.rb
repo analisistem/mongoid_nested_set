@@ -49,13 +49,13 @@ module Mongoid::Acts::NestedSet
         field :depth, :type => Integer
 
         has_many   :children, :class_name => self.name, :foreign_key => parent_field_name, :inverse_of => :parent, :order => left_field_name.to_sym.asc
-        belongs_to :parent,   :class_name => self.name, :foreign_key => parent_field_name
+        belongs_to :parent,   :class_name => self.name, :foreign_key => parent_field_name, optional: true
 
         attr_accessor :skip_before_destroy
 
-        if accessible_attributes.blank?
-          attr_protected left_field_name.intern, right_field_name.intern
-        end
+        # if accessible_attributes.blank?
+        # attr_protected left_field_name.intern, right_field_name.intern
+        # end
 
         define_callbacks :move, :terminator => "result == false"
 
