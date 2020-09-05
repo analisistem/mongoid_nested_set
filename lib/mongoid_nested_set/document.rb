@@ -216,7 +216,7 @@ module Mongoid::Acts::NestedSet
         conditions = scopes.inject({}) do |conditions,attr|
           conditions.merge attr => self[attr]
         end unless scopes.empty?
-        macro = conditions.present? scope_class.criteria.where(conditions) : scope_class.criteria
+        macro = conditions.present? ? scope_class.criteria.where(conditions) : scope_class.criteria
         macro.asc(left_field_name)
       end
 
